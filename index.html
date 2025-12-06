@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPLE - Премиум телефоны</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #ff00ae;
+            --accent-hover: #00a3cc;
+            --text: #e0e0e0;
+            --text-light: #a0a0a0;
+            --success: #00cc88;
+            --warning: #b2cf1d;
+            --border: #333;
+            --card-bg: #1a1a1a;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--text);
+            padding: 1rem 0;
+            box-shadow: 0 2px 30px rgba(0, 212, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            border: 2px solid var(--accent);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--accent-hover), #0077cc);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 46, 0.8) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%2300d4ff" fill-opacity="0.03" points="0,1000 1000,0 1000,1000"/></svg>');
+            color: var(--text);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text-light);
+        }
+
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            font-size: 2.5rem;
+            color: var(--text);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 370px;
+            object-fit: cover;
+            background: var(--secondary);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .product-description {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background: var(--secondary);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .reviews-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+        }
+
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .review-stars {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            color: var(--text-light);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Shops Section */
+        .shops-section {
+            padding: 4rem 0;
+        }
+
+        .shops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .shop-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .shop-address {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .shop-phone {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Auth Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--accent), #0099ff);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: var(--text);
+            font-size: 1.8rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--primary);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--success);
+        }
+
+        .notification.error {
+            background: var(--warning);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--text);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">APPLE</a>
+                <nav>
+                    <ul>
+                        <li><a href="#products">Ассортимент товаров</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#shops">Наши магазины</a></li>
+                        <li><a href="#about">О нас</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <div class="user-info" id="userInfo">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">Пользователь</span>
+                        <button class="btn btn-outline" id="logoutBtn">Выйти</button>
+                    </div>
+                    <button class="btn btn-outline" id="loginBtn">Войти</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>ЛУЧШИЕ ТЕЛЕФОНЫ</h1>
+            <p>Купи мобильный телефон по самой выгодной цене.</p>
+            <button class="btn btn-primary">Купить</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title">Товары в наличии</h2>
+            <div class="products-grid" id="productsContainer">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы</h2>
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shops Section -->
+    <section class="shops-section" id="shops">
+        <div class="container">
+            <h2 class="section-title">Наши магазины</h2>
+            <div class="shops-grid" id="shopsContainer">
+                <!-- Shops will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ВХОД В СИСТЕМУ</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">ВОЙТИ</button>
+            </form>
+            <div class="form-footer">
+                <p>Нет аккаунта? <a href="#" id="showRegister">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>РЕГИСТРАЦИЯ</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Имя</label>
+                    <input type="text" id="regName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Пароль</label>
+                    <input type="password" id="regPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">СОЗДАТЬ АККАУНТ</button>
+            </form>
+            <div class="form-footer">
+                <p>Уже есть аккаунт? <a href="#" id="showLogin">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>APPLE</h3>
+                    <p>ЛУЧШИЕ ТЕЛЕФОНЫ</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Модели</h3>
+                    <ul>
+                        <li><a href="#">IPHONE 14</a></li>
+                        <li><a href="#">IPHONE 15</a></li>
+                        <li><a href="#">IPHONE 16</a></li>
+                        <li><a href="#">IPHONE 17</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>ПОДДЕРЖКА</h3>
+                    <ul>
+                        <li><a href="#">Копмоненты</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>КОНТАКТЫ</h3>
+                    <ul>
+                        <li>Телефон: +79182172420</li>
+                        <li>Email: support@apple.ru</li>
+                        <li>Telegram: @anastasia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Apple. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Локальное хранилище для пользователей
+        const users = JSON.parse(localStorage.getItem('nexustech_users') || '[]');
+        let currentUser = JSON.parse(localStorage.getItem('nexustech_current_user') || 'null');
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        const notification = document.getElementById('notification');
+        const productsContainer = document.getElementById('productsContainer');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const shopsContainer = document.getElementById('shopsContainer');
+
+        // Функция для показа уведомлений
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Функция для обновления интерфейса пользователя
+        function updateUserInterface() {
+            if (currentUser) {
+                // Пользователь вошел
+                userInfo.style.display = 'flex';
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userName.textContent = currentUser.name;
+                userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+            } else {
+                // Пользователь не вошел
+                userInfo.style.display = 'none';
+                loginBtn.style.display = 'block';
+                registerBtn.style.display = 'block';
+            }
+        }
+
+        // Modal Functions
+        function openModal(modal) {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        // Event Listeners for Modals
+        loginBtn.addEventListener('click', () => openModal(loginModal));
+        registerBtn.addEventListener('click', () => openModal(registerModal));
+        logoutBtn.addEventListener('click', logout);
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                closeModal(loginModal);
+                closeModal(registerModal);
+            });
+        });
+
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(loginModal);
+            openModal(registerModal);
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(registerModal);
+            openModal(loginModal);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) closeModal(loginModal);
+            if (e.target === registerModal) closeModal(registerModal);
+        });
+
+        // Регистрация
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            // Проверяем, нет ли уже пользователя с таким email
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                showNotification('Пользователь с таким email уже существует!', 'error');
+                return;
+            }
+
+            // Создаем нового пользователя
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            };
+
+            // Сохраняем пользователя
+            users.push(newUser);
+            localStorage.setItem('nexustech_users', JSON.stringify(users));
+
+            // Автоматически входим после регистрации
+            currentUser = newUser;
+            localStorage.setItem('nexustech_current_user', JSON.stringify(currentUser));
+
+            showNotification(`Добро пожаловать в NexusTech, ${name}!`);
+            closeModal(registerModal);
+            updateUserInterface();
+            registerForm.reset();
+        });
+
+        // Вход
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Ищем пользователя
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('nexustech_current_user', JSON.stringify(currentUser));
+                showNotification(`С возвращением, ${user.name}!`);
+                closeModal(loginModal);
+                updateUserInterface();
+                loginForm.reset();
+            } else {
+                showNotification('Неверный email или пароль!', 'error');
+            }
+        });
+
+        // Выход
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('nexustech_current_user');
+            showNotification('Вы вышли из системы');
+            updateUserInterface();
+        }
+
+        // Загрузка товаров 
+        function loadProducts() {
+            const products = [
+                {
+                    id: 1,
+                    name: "Iphone 12",
+                    price: 20000,
+                    description: "Apple iPhone 12 — это мощный смартфон с процессором A14 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR и двойной системой камер 12 Мп. Он отличается плоскими гранями корпуса из алюминия и защитой экрана Ceramic Shield, которая в четыре раза повышает устойчивость к падениям.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-12/apple-iphone-12-64-gb-purple-600x600.jpg"
+                },
+                {
+                   id: 2,
+                    name: "Iphone 13",
+                    price: 35000,
+                    description: "Apple iPhone 13 — это мощный и актуальный смартфон, оснащенный процессором A15 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR и улучшенной системой двух камер, расположенных по диагонали. Он предлагает улучшенную автономность и функции безопасности, такие как обнаружение аварий.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-13/apple-iphone-13-128-gb-pink-600x600.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Iphone 14",
+                    price: 50000,
+                    description: "Apple iPhone 14 — это  смартфон с процессором A15 Bionic (с 5-ядерным графическим процессором), 6,1-дюймовым OLED-дисплеем Super Retina XDR и улучшенной системой камер. Он предлагает улучшенную автономность и функции безопасности, такие как обнаружение аварий.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-14/apple-iphone-14-128-gb-red-600x600.jpg"
+                },
+                {
+                    id: 4,
+                    name: "Iphone 15",
+                    price: 65000,
+                    description: "Apple iPhone 15 — это современный смартфон с мощным процессором A16 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR с вырезом Dynamic Island и основной камерой на 48 Мп. Он оснащен портом USB-C, который заменил традиционный разъем Lightning.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-15/apple-iphone-15-128-gb-green-600x600.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Iphone 16",
+                    price: 80000,
+                    description: "Apple iPhone 16 — это актуальный смартфон, представленный в сентябре 2024 года, который получил новый процессор Apple A18, 8 ГБ оперативной памяти и вертикально расположенный модуль камер для съемки пространственного видео. Он предлагает улучшенную автономность",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-16/apple-iphone-16-128-gb-pink-600x600.jpg"
+                },
+                {
+                    id: 6,
+                    name: "Iphone 17",
+                    price: 100000,
+                    description: "Apple iPhone 17 — это будущая линейка смартфонов от Apple. Ее официальный анонс и выпуск на рынок ожидается только осенью 2025 года. На данный момент вся информация о нем базируется на утечках, слухах от инсайдеров и прогнозах аналитиков.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-17/apple-iphone-17-256-gb-sage-600x600.jpg"
+                }
+            ];
+
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${product.price.toLocaleString()} ₽</div>
+                        <span class="product-category">${product.category}</span>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="addToCart(${product.id})">ДОБАВИТЬ В КОРЗИНУ</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Загрузка отзывов
+        function loadReviews() {
+            const reviews = [
+                {
+                    user_name: "Вася Пупкин",
+                    stars: 5,
+                    review: "Покупал здесь свой новый iPhone 16. Очень понравилось обслуживание! Консультант Никита подробно рассказал про все отличия базовой модели от Pro, помог выбрать нужный объем памяти и цвет. Цена оказалась очень приятной, ниже, чем в крупных сетевиках. Телефон оригинальный, все проверки прошел. Ушел довольный и с отличным гаджетом. Рекомендую!"
+                },
+                {
+                    user_name: "Светка Соколова",
+                    stars: 5,
+                    review: "Отличный магазин! Перешла с Android на iOS и долго выбирала между iPhone 14 и 15. Менеджеры терпеливо ответили на все мои вопросы, объяснили разницу в камерах и процессорах. В итоге взяла 15-ю модель. Приятным бонусом стала защитное стекло в подарок и помощь с настройкой. Все быстро, четко и вежливо. Чувствуется, что ребята разбираются в своем деле. Спасибо за качественный сервис!"
+                },
+                {
+                    user_name: "Паша Техник",
+                    stars: 4,
+                    review: "Обратился в Apple за покупкой iPhone 15 Pro Max. Нужна была конкретная модель и цвет, которых не было в наличии в других магазинах. Здесь быстро нашли нужный вариант, оформили заказ и доставили уже на следующий день. Курьер приехал вовремя, дал спокойно все проверить, чек и гарантия на месте. Сервис на высоте, никаких нареканий. Буду обращаться еще! "
+                }
+            ];
+
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <span class="review-author">${review.user_name}</span>
+                        <div class="review-stars">${'★'.repeat(review.stars)}${'☆'.repeat(5-review.stars)}</div>
+                    </div>
+                    <p class="review-text">${review.review}</p>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            });
+        }
+
+        // Загрузка магазинов
+        function loadShops() {
+            const shops = [
+                {
+                    address: "г. Москва, ул. Гагарина, д. 3, ТЦ 'ЭплТехника'",
+                    phone: "+7 (495) 777-77-77"
+                },
+                {
+                    address: "г. Санкт-Петербург, Невский пр., д. 128, БЦ 'ТехноПлаза'",
+                    phone: "+7 (812) 666-66-66"
+                },
+                {
+                    address: "г. Ростов-на-Дону, ул. Ленина, д. 6, ТРЦ 'МЕГА'",
+                    phone: "+7 (343) 555-55-55"
+                }
+            ];
+
+            shopsContainer.innerHTML = '';
+            shops.forEach(shop => {
+                const shopCard = document.createElement('div');
+                shopCard.className = 'shop-card';
+                shopCard.innerHTML = `
+                    <h3 class="shop-address">${shop.address}</h3>
+                    <p class="shop-phone">${shop.phone}</p>
+                    <button class="btn btn-outline" style="width: 100%;">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ</button>
+                `;
+                shopsContainer.appendChild(shopCard);
+            });
+        }
+
+        // Функция добавления в корзину
+        function addToCart(productId) {
+            if (!currentUser) {
+                openModal(loginModal);
+                return;
+            }
+            showNotification('Товар добавлен в корзину! Скоро с вами свяжется наш инженер для консультации.');
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserInterface();
+            loadProducts();
+            loadReviews();
+            loadShops();
+            
+        });
+    </script>
+</body>
+</html>
