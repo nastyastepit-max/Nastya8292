@@ -660,3 +660,455 @@ backend/
             }
         }
     </style>
+
+
+
+Cам код!!
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>ЛУЧШИЕ ТЕЛЕФОНЫ</h1>
+            <p>Купи мобильный телефон по самой выгодной цене.</p>
+            <button class="btn btn-primary">Купить</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title">Товары в наличии</h2>
+            <div class="products-grid" id="productsContainer">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы</h2>
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shops Section -->
+    <section class="shops-section" id="shops">
+        <div class="container">
+            <h2 class="section-title">Наши магазины</h2>
+            <div class="shops-grid" id="shopsContainer">
+                <!-- Shops will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ВХОД В СИСТЕМУ</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">ВОЙТИ</button>
+            </form>
+            <div class="form-footer">
+                <p>Нет аккаунта? <a href="#" id="showRegister">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>РЕГИСТРАЦИЯ</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Имя</label>
+                    <input type="text" id="regName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Пароль</label>
+                    <input type="password" id="regPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">СОЗДАТЬ АККАУНТ</button>
+            </form>
+            <div class="form-footer">
+                <p>Уже есть аккаунт? <a href="#" id="showLogin">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>APPLE</h3>
+                    <p>ЛУЧШИЕ ТЕЛЕФОНЫ</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Модели</h3>
+                    <ul>
+                        <li><a href="#">IPHONE 14</a></li>
+                        <li><a href="#">IPHONE 15</a></li>
+                        <li><a href="#">IPHONE 16</a></li>
+                        <li><a href="#">IPHONE 17</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>ПОДДЕРЖКА</h3>
+                    <ul>
+                        <li><a href="#">Копмоненты</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>КОНТАКТЫ</h3>
+                    <ul>
+                        <li>Телефон: +79182172420</li>
+                        <li>Email: support@apple.ru</li>
+                        <li>Telegram: @anastasia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Apple. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Локальное хранилище для пользователей
+        const users = JSON.parse(localStorage.getItem('nexustech_users') || '[]');
+        let currentUser = JSON.parse(localStorage.getItem('nexustech_current_user') || 'null');
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        const notification = document.getElementById('notification');
+        const productsContainer = document.getElementById('productsContainer');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const shopsContainer = document.getElementById('shopsContainer');
+
+        // Функция для показа уведомлений
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Функция для обновления интерфейса пользователя
+        function updateUserInterface() {
+            if (currentUser) {
+                // Пользователь вошел
+                userInfo.style.display = 'flex';
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userName.textContent = currentUser.name;
+                userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+            } else {
+                // Пользователь не вошел
+                userInfo.style.display = 'none';
+                loginBtn.style.display = 'block';
+                registerBtn.style.display = 'block';
+            }
+        }
+
+        // Modal Functions
+        function openModal(modal) {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        // Event Listeners for Modals
+        loginBtn.addEventListener('click', () => openModal(loginModal));
+        registerBtn.addEventListener('click', () => openModal(registerModal));
+        logoutBtn.addEventListener('click', logout);
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                closeModal(loginModal);
+                closeModal(registerModal);
+            });
+        });
+
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(loginModal);
+            openModal(registerModal);
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(registerModal);
+            openModal(loginModal);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) closeModal(loginModal);
+            if (e.target === registerModal) closeModal(registerModal);
+        });
+
+        // Регистрация
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            // Проверяем, нет ли уже пользователя с таким email
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                showNotification('Пользователь с таким email уже существует!', 'error');
+                return;
+            }
+
+            // Создаем нового пользователя
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            };
+
+            // Сохраняем пользователя
+            users.push(newUser);
+            localStorage.setItem('nexustech_users', JSON.stringify(users));
+
+            // Автоматически входим после регистрации
+            currentUser = newUser;
+            localStorage.setItem('nexustech_current_user', JSON.stringify(currentUser));
+
+            showNotification(`Добро пожаловать в NexusTech, ${name}!`);
+            closeModal(registerModal);
+            updateUserInterface();
+            registerForm.reset();
+        });
+
+        // Вход
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Ищем пользователя
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('nexustech_current_user', JSON.stringify(currentUser));
+                showNotification(`С возвращением, ${user.name}!`);
+                closeModal(loginModal);
+                updateUserInterface();
+                loginForm.reset();
+            } else {
+                showNotification('Неверный email или пароль!', 'error');
+            }
+        });
+
+        // Выход
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('nexustech_current_user');
+            showNotification('Вы вышли из системы');
+            updateUserInterface();
+        }
+
+        // Загрузка товаров 
+        function loadProducts() {
+            const products = [
+                {
+                    id: 1,
+                    name: "Iphone 12",
+                    price: 20000,
+                    description: "Apple iPhone 12 — это мощный смартфон с процессором A14 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR и двойной системой камер 12 Мп. Он отличается плоскими гранями корпуса из алюминия и защитой экрана Ceramic Shield, которая в четыре раза повышает устойчивость к падениям.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-12/apple-iphone-12-64-gb-purple-600x600.jpg"
+                },
+                {
+                   id: 2,
+                    name: "Iphone 13",
+                    price: 35000,
+                    description: "Apple iPhone 13 — это мощный и актуальный смартфон, оснащенный процессором A15 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR и улучшенной системой двух камер, расположенных по диагонали. Он предлагает улучшенную автономность и функции безопасности, такие как обнаружение аварий.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-13/apple-iphone-13-128-gb-pink-600x600.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Iphone 14",
+                    price: 50000,
+                    description: "Apple iPhone 14 — это  смартфон с процессором A15 Bionic (с 5-ядерным графическим процессором), 6,1-дюймовым OLED-дисплеем Super Retina XDR и улучшенной системой камер. Он предлагает улучшенную автономность и функции безопасности, такие как обнаружение аварий.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-14/apple-iphone-14-128-gb-red-600x600.jpg"
+                },
+                {
+                    id: 4,
+                    name: "Iphone 15",
+                    price: 65000,
+                    description: "Apple iPhone 15 — это современный смартфон с мощным процессором A16 Bionic, 6,1-дюймовым OLED-дисплеем Super Retina XDR с вырезом Dynamic Island и основной камерой на 48 Мп. Он оснащен портом USB-C, который заменил традиционный разъем Lightning.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-15/apple-iphone-15-128-gb-green-600x600.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Iphone 16",
+                    price: 80000,
+                    description: "Apple iPhone 16 — это актуальный смартфон, представленный в сентябре 2024 года, который получил новый процессор Apple A18, 8 ГБ оперативной памяти и вертикально расположенный модуль камер для съемки пространственного видео. Он предлагает улучшенную автономность",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-16/apple-iphone-16-128-gb-pink-600x600.jpg"
+                },
+                {
+                    id: 6,
+                    name: "Iphone 17",
+                    price: 100000,
+                    description: "Apple iPhone 17 — это будущая линейка смартфонов от Apple. Ее официальный анонс и выпуск на рынок ожидается только осенью 2025 года. На данный момент вся информация о нем базируется на утечках, слухах от инсайдеров и прогнозах аналитиков.",
+                    category: "Телефон",
+                    image_url: "https://apple-rostov.com/image/cache/catalog/apple-iphone-17/apple-iphone-17-256-gb-sage-600x600.jpg"
+                }
+
+                
+            ];
+
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${product.price.toLocaleString()} ₽</div>
+                        <span class="product-category">${product.category}</span>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="addToCart(${product.id})">ДОБАВИТЬ В КОРЗИНУ</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Загрузка отзывов
+        function loadReviews() {
+            const reviews = [
+                {
+                    user_name: "Вася Пупкин",
+                    stars: 5,
+                    review: "Покупал здесь свой новый iPhone 16. Очень понравилось обслуживание! Консультант Никита подробно рассказал про все отличия базовой модели от Pro, помог выбрать нужный объем памяти и цвет. Цена оказалась очень приятной, ниже, чем в крупных сетевиках. Телефон оригинальный, все проверки прошел. Ушел довольный и с отличным гаджетом. Рекомендую!"
+                },
+                {
+                    user_name: "Светка Соколова",
+                    stars: 5,
+                    review: "Отличный магазин! Перешла с Android на iOS и долго выбирала между iPhone 14 и 15. Менеджеры терпеливо ответили на все мои вопросы, объяснили разницу в камерах и процессорах. В итоге взяла 15-ю модель. Приятным бонусом стала защитное стекло в подарок и помощь с настройкой. Все быстро, четко и вежливо. Чувствуется, что ребята разбираются в своем деле. Спасибо за качественный сервис!"
+                },
+                {
+                    user_name: "Паша Техник",
+                    stars: 4,
+                    review: "Обратился в Apple за покупкой iPhone 15 Pro Max. Нужна была конкретная модель и цвет, которых не было в наличии в других магазинах. Здесь быстро нашли нужный вариант, оформили заказ и доставили уже на следующий день. Курьер приехал вовремя, дал спокойно все проверить, чек и гарантия на месте. Сервис на высоте, никаких нареканий. Буду обращаться еще! "
+                }
+            ];
+
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <span class="review-author">${review.user_name}</span>
+                        <div class="review-stars">${'★'.repeat(review.stars)}${'☆'.repeat(5-review.stars)}</div>
+                    </div>
+                    <p class="review-text">${review.review}</p>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            });
+        }
+
+        // Загрузка магазинов
+        function loadShops() {
+            const shops = [
+                {
+                    address: "г. Москва, ул. Гагарина, д. 3, ТЦ 'ЭплТехника'",
+                    phone: "+7 (495) 777-77-77"
+                },
+                {
+                    address: "г. Санкт-Петербург, Невский пр., д. 128, БЦ 'ТехноПлаза'",
+                    phone: "+7 (812) 666-66-66"
+                },
+                {
+                    address: "г. Ростов-на-Дону, ул. Ленина, д. 6, ТРЦ 'МЕГА'",
+                    phone: "+7 (343) 555-55-55"
+                }
+            ];
+
+            shopsContainer.innerHTML = '';
+            shops.forEach(shop => {
+                const shopCard = document.createElement('div');
+                shopCard.className = 'shop-card';
+                shopCard.innerHTML = `
+                    <h3 class="shop-address">${shop.address}</h3>
+                    <p class="shop-phone">${shop.phone}</p>
+                    <button class="btn btn-outline" style="width: 100%;">ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ</button>
+                `;
+                shopsContainer.appendChild(shopCard);
+            });
+        }
+
+        // Функция добавления в корзину
+        function addToCart(productId) {
+            if (!currentUser) {
+                openModal(loginModal);
+                return;
+            }
+            showNotification('Товар добавлен в корзину! Скоро с вами свяжется наш инженер для консультации.');
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserInterface();
+            loadProducts();
+            loadReviews();
+            loadShops();
+            
+        });
+    </script>
+</body>
+</html>
