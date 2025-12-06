@@ -1,11 +1,3 @@
-# Backend API
-
-Backend часть веб-приложения на Node.js + Express + SQLite с REST API.
-
-
-### Требования
-- Node.js
-- npm
 
 ### Установка и запуск
     
